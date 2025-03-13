@@ -67,9 +67,9 @@ router.post("/signin", async (req, res) => {
     }
 });
 
-// Protected Route (Main)
+// Protected Main Route
 router.get("/", authMiddleware, (req, res) => {
-    res.json({ message: `Welcome, ${req.user.name}!` });
+    res.json({ message: `Welcome, ${req.user.username}!` });
 });
 
 module.exports = router;
