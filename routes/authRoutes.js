@@ -38,23 +38,33 @@ router.post("/signup", async (req, res) => {
 
 // Sign-in Route
 router.post("/signin", async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ username });
-    if (!user) {
-        return res.status(400).json({ message: "Invalid credentials" });
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required!" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid credentials!" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials!" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.json({ message: "Sign-in successful!", token, username: user.username });
+    } catch (error) {
+        res.status(500).json({ message: "Error signing in!", error });
     }
-
-    const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-    });
-
-    res.json({ message: "Sign-in successful", token });
 });
 
 // Protected Route (Main)
