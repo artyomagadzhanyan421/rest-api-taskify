@@ -11,17 +11,17 @@ router.post("/signup", async (req, res) => {
     const { name, username, email, password } = req.body;
 
     if (!name || !username || !email || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "All fields are required!" });
     }
 
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
 
     if (existingUser) {
         if (existingUser.username === username) {
-            return res.status(400).json({ message: "Username already taken" });
+            return res.status(400).json({ message: "Username already taken!" });
         }
         if (existingUser.email === email) {
-            return res.status(400).json({ message: "Email already taken" });
+            return res.status(400).json({ message: "Email already taken!" });
         }
     }
 
@@ -30,9 +30,9 @@ router.post("/signup", async (req, res) => {
 
     try {
         await user.save();
-        res.status(201).json({ message: "User created successfully. Please sign in." });
+        res.status(201).json({ message: "User created successfully!" });
     } catch (error) {
-        res.status(500).json({ message: "Error creating user", error });
+        res.status(500).json({ message: "Error creating user!", error });
     }
 });
 
