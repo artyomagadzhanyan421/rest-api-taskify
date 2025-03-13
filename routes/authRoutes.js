@@ -6,32 +6,33 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Signup Route
+// Sign-up Route
 router.post("/signup", async (req, res) => {
     const { name, username, email, password } = req.body;
 
     if (!name || !username || !email || !password) {
-        return res.status(400).json({ message: "All fields are required!" });
+        return res.status(400).json({ message: "All fields are required" });
     }
 
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+
+    if (existingUser) {
+        if (existingUser.username === username) {
+            return res.status(400).json({ message: "Username already taken" });
+        }
+        if (existingUser.email === email) {
+            return res.status(400).json({ message: "Email already taken" });
+        }
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ name, username, email, password: hashedPassword });
+
     try {
-        const existingUsername = await User.findOne({ username });
-        const existingEmail = await User.findOne({ email });
-
-        if (existingUsername) {
-            return res.status(400).json({ message: "Username already taken!" });
-        }
-        if (existingEmail) {
-            return res.status(400).json({ message: "Email already registered!" });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, username, email, password: hashedPassword });
-
         await user.save();
-        res.status(201).json({ message: "User created successfully!" });
+        res.status(201).json({ message: "User created successfully. Please sign in." });
     } catch (error) {
-        res.status(500).json({ message: "Error creating user!", error });
+        res.status(500).json({ message: "Error creating user", error });
     }
 });
 
@@ -66,9 +67,9 @@ router.post("/signin", async (req, res) => {
     }
 });
 
-// Protected Main Route
+// Protected Route (Main)
 router.get("/", authMiddleware, (req, res) => {
-    res.json({ message: `Welcome, ${req.user.username}!` });
+    res.json({ message: `Welcome, ${req.user.name}!` });
 });
 
 module.exports = router;
