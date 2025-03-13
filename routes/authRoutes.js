@@ -11,7 +11,7 @@ router.post("/signup", async (req, res) => {
     const { name, username, email, password } = req.body;
 
     if (!name || !username || !email || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "All fields are required!" });
     }
 
     try {
@@ -19,19 +19,19 @@ router.post("/signup", async (req, res) => {
         const existingEmail = await User.findOne({ email });
 
         if (existingUsername) {
-            return res.status(400).json({ message: "Username already taken" });
+            return res.status(400).json({ message: "Username already taken!" });
         }
         if (existingEmail) {
-            return res.status(400).json({ message: "Email already registered" });
+            return res.status(400).json({ message: "Email already registered!" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ name, username, email, password: hashedPassword });
 
         await user.save();
-        res.status(201).json({ message: "User created successfully" });
+        res.status(201).json({ message: "User created successfully!" });
     } catch (error) {
-        res.status(500).json({ message: "Error creating user", error });
+        res.status(500).json({ message: "Error creating user!", error });
     }
 });
 
@@ -40,18 +40,18 @@ router.post("/signin", async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        return res.status(400).json({ message: "Username and password are required" });
+        return res.status(400).json({ message: "Username and password are required!" });
     }
 
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ message: "Invalid credentials!" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ message: "Invalid credentials!" });
         }
 
         const token = jwt.sign(
@@ -60,9 +60,9 @@ router.post("/signin", async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        res.json({ message: "Sign-in successful", token });
+        res.json({ message: "Sign-in successful!", token });
     } catch (error) {
-        res.status(500).json({ message: "Error signing in", error });
+        res.status(500).json({ message: "Error signing in!", error });
     }
 });
 
