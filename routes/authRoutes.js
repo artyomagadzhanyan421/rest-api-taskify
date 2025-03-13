@@ -55,12 +55,12 @@ router.post("/signin", async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: user._id, name: user.name, email: user.email },
+            { id: user._id, username: user.username },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
-        res.json({ message: "Sign-in successful!", token });
+        res.json({ message: "Sign-in successful!", token, username: user.username });
     } catch (error) {
         res.status(500).json({ message: "Error signing in!", error });
     }
@@ -68,7 +68,7 @@ router.post("/signin", async (req, res) => {
 
 // Protected Main Route
 router.get("/", authMiddleware, (req, res) => {
-    res.json({ message: `Welcome, ${req.user.name}!` });
+    res.json({ message: `Welcome, ${req.user.username}!` });
 });
 
 module.exports = router;
