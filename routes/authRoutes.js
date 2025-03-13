@@ -8,21 +8,26 @@ const router = express.Router();
 
 // Signup Route
 router.post("/signup", async (req, res) => {
-    const { name, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    if (!name || !password) {
+    if (!name || !username || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
     }
 
-    const existingUser = await User.findOne({ name });
-    if (existingUser) {
-        return res.status(400).json({ message: "Username already taken" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ name, password: hashedPassword });
-
     try {
+        const existingUsername = await User.findOne({ username });
+        const existingEmail = await User.findOne({ email });
+
+        if (existingUsername) {
+            return res.status(400).json({ message: "Username already taken" });
+        }
+        if (existingEmail) {
+            return res.status(400).json({ message: "Email already registered" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new User({ name, username, email, password: hashedPassword });
+
         await user.save();
         res.status(201).json({ message: "User created successfully" });
     } catch (error) {
@@ -32,23 +37,33 @@ router.post("/signup", async (req, res) => {
 
 // Sign-in Route
 router.post("/signin", async (req, res) => {
-    const { name, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = await User.findOne({ name });
-    if (!user) {
-        return res.status(400).json({ message: "Invalid credentials" });
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, name: user.name, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.json({ message: "Sign-in successful", token });
+    } catch (error) {
+        res.status(500).json({ message: "Error signing in", error });
     }
-
-    const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-    });
-
-    res.json({ message: "Sign-in successful", token });
 });
 
 // Protected Main Route
