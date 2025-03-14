@@ -56,12 +56,12 @@ router.post("/signin", async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: user._id, username: user.username },
+            { id: user._id, username: user.username, name: user.name },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 
-        res.json({ message: "Sign-in successful!", token, username: user.username });
+        res.json({ message: "Sign-in successful!", token, username: user.username, name: user.name });
     } catch (error) {
         res.status(500).json({ message: "Error signing in!", error });
     }
