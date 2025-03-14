@@ -4,7 +4,9 @@ const dotenv = require("dotenv");
 const connectDB = require("./mongodb/connect");
 const authRoutes = require("./routes/authRoutes");
 
+// .env 
 dotenv.config();
+
 const app = express();
 
 // Middleware
