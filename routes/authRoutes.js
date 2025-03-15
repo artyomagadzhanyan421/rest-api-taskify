@@ -6,7 +6,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Sign-up Route
+// POST request (create an account)
 router.post("/signup", async (req, res) => {
     const { name, username, email, password } = req.body;
 
@@ -36,7 +36,7 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-// Sign-in Route
+// POST request (enter an account)
 router.post("/signin", async (req, res) => {
     const { email, password } = req.body;
 
