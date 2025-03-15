@@ -4,7 +4,7 @@ const Task = require("../mongodb/models/taskModel");
 
 const router = express.Router();
 
-// Create a new task
+// POST request
 router.post("/tasks", authMiddleware, async (req, res) => {
     const { title, startDate, endDate, description } = req.body;
 
@@ -28,7 +28,7 @@ router.post("/tasks", authMiddleware, async (req, res) => {
     }
 });
 
-// Get tasks for the signed-in user
+// GET request (render all tasks)
 router.get("/tasks", authMiddleware, async (req, res) => {
     try {
         const tasks = await Task.find({ userId: req.user.id });
@@ -38,7 +38,7 @@ router.get("/tasks", authMiddleware, async (req, res) => {
     }
 });
 
-// Update Task
+// PUT request
 router.put("/tasks/:id", authMiddleware, async (req, res) => {
     const { title, startDate, endDate, description } = req.body;
     const taskId = req.params.id;
@@ -72,7 +72,7 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
     }
 });
 
-// Get a specific task
+// GET request (render individual task)
 router.get("/tasks/:id", authMiddleware, async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
