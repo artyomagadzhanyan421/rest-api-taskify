@@ -1,6 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../middleware/authMiddleware");
-const Task = require("../models/taskModel");
+const Task = require("../mongodb/models/taskModel");
 
 const router = express.Router();
 
