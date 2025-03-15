@@ -73,7 +73,7 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
 });
 
 // DELETE request
-router.delete("/:id", authMiddleware, async (req, res) => {
+router.delete("/tasks/:id", authMiddleware, async (req, res) => {
     const { id } = req.params;
 
     try {
