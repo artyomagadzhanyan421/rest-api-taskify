@@ -72,6 +72,25 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
     }
 });
 
+// DELETE request
+router.delete("/:id", authMiddleware, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const task = await Task.findById(id);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        await Task.findByIdAndDelete(id);
+        res.json({ message: "Task deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 // GET request (render individual task)
 router.get("/tasks/:id", authMiddleware, async (req, res) => {
     try {
