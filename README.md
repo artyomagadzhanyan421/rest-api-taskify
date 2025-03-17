@@ -13,6 +13,7 @@ This is the backend API for the **Taskify** project, a task management applicati
 ### **Authentication**  
 
 #### **1. Sign Up**  
+
 **Endpoint:** `POST /signup`  
 **Description:** Create a new user account.  
 **Request Body:**  
@@ -23,3 +24,11 @@ This is the backend API for the **Taskify** project, a task management applicati
   "email": "john@example.com",
   "password": "securepassword"
 }
+```
+
+**Response:**  
+```json
+{
+  "message": "User registered successfully"
+}
+```
