@@ -1,4 +1,4 @@
-## REST API for Taskify
+# REST API for Taskify
 
 This is the backend API for the Taskify project, a task management application. The API allows users to create, read, update, and delete tasks while handling authentication.
 
@@ -7,4 +7,16 @@ This is the backend API for the Taskify project, a task management application. 
 * Secure endpoints using JWT authentication
 * MongoDB database for storing users and tasks
 
-### API Endpoints
+## API Endpoints
+
+* Sign Up endpoint: /signup
+* Description: Create a new user account
+
+``` json
+{
+  "name": "John Doe",
+  "username": "johndoe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
