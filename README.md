@@ -7,7 +7,7 @@ This is the backend API for the Taskify project, a task management application. 
 * Secure endpoints using JWT authentication
 * MongoDB database for storing users and tasks
 
-## API Endpoints
+## Authentication Endpoints
 
 * POST Sign Up endpoint: "/signup"
 * Description: Create a new user account
@@ -53,4 +53,13 @@ Responsse
     "username": "johndoe",
     "name": "John Doe"
 }
+```
+
+* GET Sign In endpoint: "/"
+* Description: Enter account with an authentication token
+
+Use Authorization tab, choose Bearer Token in your Type dropdown
+
+```
+Authorization: Bearer <your-jwt-token>
 ```
