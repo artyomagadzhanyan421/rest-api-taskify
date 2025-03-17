@@ -18,7 +18,7 @@ router.post("/tasks", authMiddleware, async (req, res) => {
             startDate,
             endDate,
             description,
-            userId: req.user.id // Associate task with the signed-in user
+            userId: req.user.id
         });
 
         await newTask.save();
