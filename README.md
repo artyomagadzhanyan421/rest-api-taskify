@@ -63,3 +63,11 @@ Use Authorization tab, choose Bearer Token in your Type dropdown
 ```
 Authorization: Bearer <your-jwt-token>
 ```
+
+Responsse 
+
+``` json
+{
+    "message": "Welcome, tomaspinall!"
+}
+```
