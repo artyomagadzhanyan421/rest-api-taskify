@@ -71,3 +71,5 @@ Responsse
     "message": "Welcome, johndoe!"
 }
 ```
+
+## Task Endpoints
