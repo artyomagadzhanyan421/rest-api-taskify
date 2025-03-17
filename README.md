@@ -68,6 +68,6 @@ Responsse
 
 ``` json
 {
-    "message": "Welcome, tomaspinall!"
+    "message": "Welcome, johndoe!"
 }
 ```
