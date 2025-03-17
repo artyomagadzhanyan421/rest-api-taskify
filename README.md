@@ -9,14 +9,25 @@ This is the backend API for the Taskify project, a task management application. 
 
 ## API Endpoints
 
-* Sign Up endpoint: /signup
+* POST Sign Up endpoint: /signup
 * Description: Create a new user account
+* Activation: Use Body request tab
 
 ``` json
+// Enter credentials
+
 {
   "name": "John Doe",
   "username": "johndoe",
   "email": "john@example.com",
   "password": "securepassword"
+}
+```
+
+``` json
+// Response
+
+{
+  "message": "User registered successfully"
 }
 ```
