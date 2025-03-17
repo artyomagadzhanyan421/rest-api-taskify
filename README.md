@@ -12,7 +12,7 @@ This is the backend API for the **Taskify** project, a task management applicati
 
 ### **Authentication**  
 
-#### **Sign Up**  
+#### **1. Sign Up**  
 **Endpoint:** `POST /signup`  
 **Description:** Create a new user account.  
 **Request Body:**  
