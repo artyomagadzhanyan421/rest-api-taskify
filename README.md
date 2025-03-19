@@ -16,3 +16,10 @@ This is the backend API for the **Taskify** project, a task management applicati
 - CRUD operations for tasks (Create, Read, Update, Delete)  
 - Secure endpoints using JWT authentication  
 - MongoDB database for storing users and tasks
+
+### Tech Stack
+- [Node.js](https://github.com/nodejs/node.git) + [Express.js](https://github.com/expressjs/express.git)
+- [Mongoose](https://github.com/Automattic/mongoose.git) for storing user and task data
+- [JWT](https://github.com/auth0/node-jsonwebtoken.git) for authentication and secure access control
+- [bcrypt.js](https://github.com/kelektiv/node.bcrypt.js.git) for password hashing and securely storing passwords
+- [Dotenv](https://github.com/motdotla/dotenv.git) for managing environment variables securely
