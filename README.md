@@ -49,7 +49,7 @@ npm install
 - Add ```users``` and ```tasks``` collections in your database
 - Get your connection string (formatted as ```mongodb+srv://<username>:<db_password>@<clustername>.gdbya.mongodb.net/<dbname>```).
 - Replace ```<username>```, ```<password>```, ```<clustername>``` and ```<dbname>``` with your actual details
-- Add this connection string as ```MONGO_URI``` and ```JWT_SECRET``` in your ```.env``` file
+- Add this connection string as ```MONGO_URI``` and ```JWT_SECRET``` in your created ```.env``` file
 
 ```bash
 MONGO_URI=your_mongodb_connection_string
