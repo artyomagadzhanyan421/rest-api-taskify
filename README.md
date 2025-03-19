@@ -29,6 +29,9 @@ This is the backend API for the **Taskify** project, a task management applicati
 
 ### Installation & Setup
 
+> [!IMPORTANT]  
+> Ensure you've created an account om [MongoDB](https://www.mongodb.com/) before proceeding.
+
 **1. MongoDB Atlas (Cloud Database)**
 - Create a free account at MongoDB Atlas
 - Create a new cluster and database
