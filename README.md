@@ -35,6 +35,7 @@ This is the backend API for the **Taskify** project, a task management applicati
 **1. MongoDB Atlas (Cloud Database)**
 - Create a free account at MongoDB Atlas
 - Create a new cluster and database
+- Add ```users``` and ```tasks``` collections in your database
 - Get your connection string (formatted as ```mongodb+srv://<username>:<db_password>@<clustername>.gdbya.mongodb.net/<dbname>```).
 - Replace ```<username>```, ```<password>```, ```<clustername>``` and ```<dbname>``` with your actual details
 - Add this connection string as ```MONGO_URI``` and ```JWT_SECRET``` in your ```.env``` file
