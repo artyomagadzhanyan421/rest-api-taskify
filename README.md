@@ -37,4 +37,4 @@ This is the backend API for the **Taskify** project, a task management applicati
 - Create a new cluster and database
 - Get your connection string (formatted as ```mongodb+srv://<username>:<db_password>@<clustername>.gdbya.mongodb.net/<dbname>```).
 - Replace ```<username>```, ```<password>```, ```<clustername>``` and ```<dbname>``` with your actual details
-- Add this connection string as ```MONGO_URI``` in your ```.env``` file
+- Add this connection string as ```MONGO_URI``` and ```JWT_SECRET``` in your ```.env``` file
