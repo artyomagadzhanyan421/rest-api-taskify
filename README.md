@@ -1,5 +1,7 @@
 # Taskify REST API  
 
+![Static Badge](https://img.shields.io/badge/20.16.0-%236cc24a?label=node)
+
 This is the backend API for the **Taskify** project, a task management application. The API allows users to create, read, update, and delete tasks while handling authentication.  
 
 ### Features
