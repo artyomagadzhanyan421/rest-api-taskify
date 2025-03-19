@@ -9,7 +9,7 @@
 ![Static Badge](https://img.shields.io/badge/%5E8.12.1-limegreen?label=mongoose)
 ![Static Badge](https://img.shields.io/badge/%5E3.1.9-olivedrab?label=nodemon)
 
-This is the backend API for the **Taskify** project, a task management application. The API allows users to create, read, update, and delete tasks while handling authentication.  
+This is the backend API for the [Taskify](https://github.com/artyomagadzhanyan421/taskify.git) project, a task management application. The API allows users to create, read, update, and delete tasks while handling authentication.  
 
 > [!IMPORTANT]  
 > Ensure you have the latest versions of [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed before proceeding.
