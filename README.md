@@ -32,7 +32,12 @@ This is the backend API for the **Taskify** project, a task management applicati
 > [!IMPORTANT]  
 > Ensure you've created an account on [MongoDB](https://www.mongodb.com/) before proceeding.
 
-**1. MongoDB Atlas (Cloud Database)**
+**1. Install dependencies**
+```bash
+npm install
+```
+
+**2. MongoDB Atlas (cloud database)**
 - Create a free account at MongoDB Atlas
 - Create a new cluster and database
 - Add ```users``` and ```tasks``` collections in your database
@@ -43,4 +48,9 @@ This is the backend API for the **Taskify** project, a task management applicati
 ```bash
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+```
+
+**3. Start your server**
+```bash
+npx nodemon index.js
 ```
