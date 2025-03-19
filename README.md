@@ -11,6 +11,9 @@
 
 This is the backend API for the **Taskify** project, a task management application. The API allows users to create, read, update, and delete tasks while handling authentication.  
 
+> [!IMPORTANT]  
+> Ensure you have the latest versions of [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed before proceeding.
+
 ### Features
 - User authentication (Sign Up, Sign In)  
 - CRUD operations for tasks (Create, Read, Update, Delete)  
@@ -23,3 +26,5 @@ This is the backend API for the **Taskify** project, a task management applicati
 - [JWT](https://github.com/auth0/node-jsonwebtoken.git) for authentication and secure access control
 - [bcrypt.js](https://github.com/kelektiv/node.bcrypt.js.git) for password hashing and securely storing passwords
 - [Dotenv](https://github.com/motdotla/dotenv.git) for managing environment variables securely
+
+### Installation & Setup
