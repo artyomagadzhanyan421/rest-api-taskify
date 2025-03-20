@@ -55,7 +55,7 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
         }
 
         // Ensure the task belongs to the signed-in user
-        if (task.userId.toString() !== req.user.id) { // Fixed `user` to `userId`
+        if (task.userId.toString() !== req.user.id) { 
             return res.status(403).json({ message: "Not authorized to edit this task!" });
         }
 
@@ -83,6 +83,7 @@ router.delete("/tasks/:id", authMiddleware, async (req, res) => {
             return res.status(404).json({ message: "Task not found" });
         }
 
+        // Ensure the task belongs to the signed-in user
         if (task.userId.toString() !== req.user.id) {
             return res.status(403).json({ message: "Not authorized to delete this task!" });
         }
@@ -104,6 +105,7 @@ router.get("/tasks/:id", authMiddleware, async (req, res) => {
             return res.status(404).json({ message: "Task not found!" });
         }
 
+        // Ensure the task belongs to the signed-in user
         if (task.userId.toString() !== req.user.id) {
             return res.status(403).json({ message: "Not authorized to view this task!" });
         }
