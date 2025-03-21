@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddleware = require("../middleware/authMiddleware");
 const Task = require("../mongodb/models/taskModel");
+const sendEmail = require("../utils/mailer");
 
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.post("/tasks", authMiddleware, async (req, res) => {
         });
 
         await newTask.save();
+        await sendEmail(req.user.email, "Task Created", `Your task "${title}" has been created.`);
         res.status(201).json({ message: "Task created successfully!", task: newTask });
     } catch (error) {
         res.status(500).json({ message: "Error creating task!", error: error.message });
@@ -55,7 +57,7 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
         }
 
         // Ensure the task belongs to the signed-in user
-        if (task.userId.toString() !== req.user.id) { 
+        if (task.userId.toString() !== req.user.id) {
             return res.status(403).json({ message: "Not authorized to edit this task!" });
         }
 
@@ -65,6 +67,7 @@ router.put("/tasks/:id", authMiddleware, async (req, res) => {
         task.description = description;
 
         await task.save();
+        await sendEmail(req.user.email, "Task Updated", `Your task "${title}" has been updated.`);
         res.json({ message: "Task updated successfully!", task });
     } catch (error) {
         console.error("Error updating task:", error);
@@ -89,6 +92,7 @@ router.delete("/tasks/:id", authMiddleware, async (req, res) => {
         }
 
         await Task.findByIdAndDelete(id);
+        await sendEmail(req.user.email, "Task Deleted", `Your task "${task.title}" has been deleted.`);
         res.json({ message: "Task deleted successfully" });
     } catch (error) {
         console.error("Error deleting task:", error);
