@@ -120,4 +120,34 @@ router.get("/tasks/:id", authMiddleware, async (req, res) => {
     }
 });
 
+router.patch("/tasks/:id/status", authMiddleware, async (req, res) => {
+    const taskId = req.params.id;
+
+    try {
+        const task = await Task.findById(taskId);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found!" });
+        }
+
+        if (task.userId.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Not authorized to update this task!" });
+        }
+
+        // Toggle between 'pending' and 'completed'
+        task.status = task.status === "completed" ? "pending" : "completed";
+        await task.save();
+
+        const statusMessage = task.status === "completed"
+            ? `Your task "${task.title}" has been marked as completed.`
+            : `Your task "${task.title}" has been set to pending.`;
+
+        await sendEmail(req.user.email, "Task Status Updated", statusMessage);
+
+        res.json({ message: `Task marked as ${task.status}!`, task });
+    } catch (error) {
+        res.status(500).json({ message: "Error toggling task status!", error: error.message });
+    }
+});
+
 module.exports = router;
