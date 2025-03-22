@@ -134,7 +134,7 @@ router.patch("/tasks/:id/status", authMiddleware, async (req, res) => {
             return res.status(403).json({ message: "Not authorized to update this task!" });
         }
 
-        // Toggle between 'completed' and 'pending'
+        // Toggle between 'completed' & 'pending'
         task.status = task.status === "completed" ? "pending" : "completed";
         await task.save();
 
