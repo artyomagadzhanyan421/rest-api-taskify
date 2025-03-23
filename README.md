@@ -56,7 +56,22 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-**4. Start your server**
+**4. MongoDB Atlas (cloud database)**
+- Go to your Google Account settings
+- Click on **Security** from the sidebar
+- Enable **2-Step Verification** if it's not already enabled
+- In your search tab select **App Passwords**
+- Create a new app and copy your generated password
+- Add new variales in your ```.env``` file
+
+```bash
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-generated-app-password
+```
+
+**5. Start your server**
 ```bash
 npx nodemon index.js
 ```
