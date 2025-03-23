@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../mongodb/models/userModel"); 
+const User = require("../mongodb/models/userModel");
 
 const authMiddleware = async (req, res, next) => {
     const authHeader = req.header("Authorization");
@@ -8,6 +8,11 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1];
+
+    if (tokenBlacklist.has(token)) {
+        return res.status(401).json({ message: "Token has been invalidated, please sign in again." });
+    }
+
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 

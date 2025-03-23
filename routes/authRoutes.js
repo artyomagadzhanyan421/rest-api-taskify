@@ -67,6 +67,15 @@ router.post("/signin", async (req, res) => {
     }
 });
 
+// POST request (leave an account)
+router.post("/signout", authMiddleware, (req, res) => {
+    const token = req.header("Authorization").split(" ")[1];
+
+    tokenBlacklist.add(token);
+
+    res.json({ message: "Sign-out successful!" });
+});
+
 // GET request (main route)
 router.get("/", authMiddleware, (req, res) => {
     res.json({ message: `Welcome, ${req.user.username}!` });
