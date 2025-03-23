@@ -56,7 +56,7 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-**4. MongoDB Atlas (cloud database)**
+**4. Generate an App Password**
 - Go to your Google Account settings
 - Click on **Security** from the sidebar
 - Enable **2-Step Verification** if it's not already enabled
